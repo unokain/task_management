@@ -1,0 +1,22 @@
+
+<h1 class="title">タスク管理ツール</h1>
+  <p><%= notice %></p>
+    <table>
+      <tr>
+        <th>タイトル</th>
+        <th>タスク詳細</th>
+      </tr>
+        <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.task_name %></td>
+        <td><%= task.details %></td>
+        <td><%= link_to '詳細を確認する', task_path(task.id) %></td>
+        <td><%= link_to '編集する', edit_task_path(task.id) %></td>
+        <td><%= link_to '削除する', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
+      </tr>
+      <% end %>
+    </table>
+  <%= link_to 'タスクを作る', new_task_path %>
+  <footer class="footer">
+    <p>Copyright © 2020 株式会社Wing</p>
+  </footer>

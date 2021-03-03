@@ -1,3 +1,3 @@
-Task
-• task_name  string
-• details text
+task.rb
+• task_name : string
+• details        : text

@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'タスク管理機能', type: :system do
-  before do
-    # あらかじめタスク一覧のテストで使用するためのタスクを二つ作成する
-    FactoryBot.create(:task)
-    FactoryBot.create(:second_task)
-  end
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
@@ -28,6 +23,19 @@ RSpec.describe 'タスク管理機能', type: :system do
         # have_contentされているか（含まれているか）ということをexpectする（確認・期待する）git
         expect(page).to have_content 'task'
         # expectの結果が true ならテスト成功、false なら失敗として結果が出力される
+      end
+    end
+    context 'タスクが作成日時の降順に並んでいる場合' do
+      it '新しいタスクが一番上に表示される' do
+        Task.create(id: 1, task_name: 'hi', details: 'hi')
+        Task.create(id: 2, task_name: 'hi', details: 'hihi2', created_at: Time.current + 1.days)
+        Task.create(id: 3, task_name: 'hiii', details: 'hihi3', created_at: Time.current + 2.days)
+        Task.create(id: 4, task_name: 'hiiiii', details: 'hihi4', created_at: Time.current + 3.days)
+        visit tasks_path
+        task = all('#task_list')
+        task_0 = task[0]
+        expect(task_0).to have_content '4'
+        save_and_open_page
       end
     end
   end

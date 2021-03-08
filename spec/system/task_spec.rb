@@ -7,6 +7,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in "Task name", with: '万葉課題'
         fill_in "Details", with: '課題の進捗状況'
+        fill_in "Limit",with: '20211231'
         click_on 'Create Task'
         expect(page).to have_content '課題の進捗状況'
       end
@@ -27,14 +28,28 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
-        Task.create(id: 1, task_name: 'hi', details: 'hi')
-        Task.create(id: 2, task_name: 'hi', details: 'hihi2', created_at: Time.current + 1.days)
-        Task.create(id: 3, task_name: 'hiii', details: 'hihi3', created_at: Time.current + 2.days)
-        Task.create(id: 4, task_name: 'hiiiii', details: 'hihi4', created_at: Time.current + 3.days)
+        Task.create(id: 1, task_name: 'hi', details: 'hi',limit: '20210301')
+        Task.create(id: 2, task_name: 'hi', details: 'hihi2',limit: '20210401', created_at: Time.current + 1.days)
+        Task.create(id: 3, task_name: 'hiii', details: 'hihi3', limit: '20210501',created_at: Time.current + 2.days)
+        Task.create(id: 4, task_name: 'hiiiii', details: 'hihi4',limit: '20210601', created_at: Time.current + 3.days)
         visit tasks_path
         task = all('#task_list')
         task_0 = task[0]
         expect(task_0).to have_content '4'
+        save_and_open_page
+      end
+    end
+    context 'タスクの終了期限を降順で並べ替える場合' do
+      it '終了期限が新しいタスクが一番上に表示される' do
+        Task.create(id: 1, task_name: 'ahi', details: 'ahi', limit: '20210301')
+        Task.create(id: 2, task_name: 'ahii', details: 'ahihi2',limit: '20210401', created_at: Time.current + 1.days)
+        Task.create(id: 3, task_name: 'ahiii', details: 'ahihi3',limit: '20210501', created_at: Time.current + 2.days)
+        Task.create(id: 4, task_name: 'ahiiiii', details: 'ahihi4',limit: '20210601', created_at: Time.current + 3.days)
+        visit tasks_path
+        click_on "終了期限でソートする"
+        task = all('#task_limit')
+        task_0 = task[0]
+        expect(task_0).to have_content '2021-06-01'
         save_and_open_page
       end
     end

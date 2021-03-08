@@ -10,6 +10,7 @@
       <tr>
         <td><%= task.task_name %></td>
         <td id="task_list"><%= task.details %></td>
+        <td id="task_limit"><%= task.limit %></td>
         <td><%= link_to '詳細を確認する', task_path(task.id) %></td>
         <td><%= link_to '編集する', edit_task_path(task.id) %></td>
         <td><%= link_to '削除する', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
@@ -17,6 +18,7 @@
       <% end %>
     </table>
   <%= link_to 'タスクを作る', new_task_path %>
+  <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
   <footer class="footer">
     <p>Copyright © 2020 株式会社Wing</p>
   </footer>

@@ -9,6 +9,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in "Details", with: '課題の進捗状況'
         fill_in "Limit",with: '20211231'
         find("option[value='完了']").select_option
+        find("option[value='高']").select_option
         click_on 'Create Task'
         expect(page).to have_content '課題の進捗状況'
       end
@@ -70,10 +71,11 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
-        Task.create(id: 1, task_name: 'hi', details: 'hi',limit: '20210301',status:"完了")
-        Task.create(id: 2, task_name: 'hi', details: 'hihi2',limit: '20210401',status:"未着手", created_at: Time.current + 1.days)
-        Task.create(id: 3, task_name: 'hiii', details: 'hihi3', limit: '20210501',status:"着手", created_at: Time.current + 2.days)
-        Task.create(id: 4, task_name: 'hiiiii', details: 'hihi4',limit: '20210601', status:"着手", created_at: Time.current + 3.days)
+        #変更があるたび、要素を追加する必要があり、大変なので、で切るだけfactorybotを使おう
+        Task.create(id: 1, task_name: 'hi', details: 'hi',limit: '20210301',status:"完了",priority:"中")
+        Task.create(id: 2, task_name: 'hi', details: 'hihi2',limit: '20210401',status:"未着手", priority:"中",created_at: Time.current + 1.days)
+        Task.create(id: 3, task_name: 'hiii', details: 'hihi3', limit: '20210501',status:"着手", priority:"中",created_at: Time.current + 2.days)
+        Task.create(id: 4, task_name: 'hiiiii', details: 'hihi4',limit: '20210601', status:"着手", priority:"中",created_at: Time.current + 3.days)
         visit tasks_path
         task = all('#task_list')
         task_0 = task[0]
@@ -83,15 +85,29 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タスクの終了期限を降順で並べ替える場合' do
       it '終了期限が新しいタスクが一番上に表示される' do
-        Task.create(id: 1, task_name: 'ahi', details: 'ahi', limit: '20210301',status:"完了")
-        Task.create(id: 2, task_name: 'ahii', details: 'ahihi2',limit: '20210401',status:"完了", created_at: Time.current + 1.days)
-        Task.create(id: 3, task_name: 'ahiii', details: 'ahihi3',limit: '20210501', status:"完了",created_at: Time.current + 2.days)
-        Task.create(id: 4, task_name: 'ahiiiii', details: 'ahihi4',limit: '20210601', status:"完了",created_at: Time.current + 3.days)
+        Task.create(id: 1, task_name: 'ahi', details: 'ahi', limit: '20210301',status:"完了",priority:"中")
+        Task.create(id: 2, task_name: 'ahii', details: 'ahihi2',limit: '20210401',status:"完了", priority:"中",created_at: Time.current + 1.days)
+        Task.create(id: 3, task_name: 'ahiii', details: 'ahihi3',limit: '20210501', status:"完了",priority:"中",created_at: Time.current + 2.days)
+        Task.create(id: 4, task_name: 'ahiiiii', details: 'ahihi4',limit: '20210601', status:"完了",priority:"中",created_at: Time.current + 3.days)
         visit tasks_path
-        click_on "終了期限でソートする"
+        click_on "終了期限"
         task = all('#task_limit')
         task_0 = task[0]
         expect(task_0).to have_content '2021/06/01'
+        save_and_open_page
+      end
+    end
+    context 'タスクの優先順位を昇順で並べ替える場合' do
+      it '優先順位高が一番上に表示される' do
+        Task.create(id: 1, task_name: 'bhi', details: 'bhi', limit: '20210301',status:"完了",priority:"中")
+        Task.create(id: 2, task_name: 'bhii', details: 'bhihi2',limit: '20210401',status:"完了", priority:"中",created_at: Time.current + 1.days)
+        Task.create(id: 3, task_name: 'bhiii', details: 'bhihi3',limit: '20210501', status:"完了",priority:"中",created_at: Time.current + 2.days)
+        Task.create(id: 4, task_name: 'bhiiiii', details: 'bhihi4',limit: '20210601', status:"完了",priority:"高",created_at: Time.current + 3.days)
+        visit tasks_path
+        click_on "優先度"
+        task = all('#task_priority')
+        task_0 = task[0]
+        expect(task_0).to have_content '高'
         save_and_open_page
       end
     end

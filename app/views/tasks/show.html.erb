@@ -3,6 +3,7 @@
 <p>詳細: <%= @task.details %></p>
 <p>タスクの終了期限: <%=@task.limit%></p>
 <p>ステータス:<%=@task.status%></p>
+<p>優先順位:<%=@task.priority%></p>
 <p id="notice"><%= notice %></p>
 
 <%= link_to '編集', edit_task_path(@task) %> |

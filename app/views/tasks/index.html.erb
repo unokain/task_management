@@ -1,38 +1,57 @@
 
-<h1 class="title">タスク管理ツール</h1>
-  <p><%= notice %></p>
+
+<div class="wrapper">
+<section class="mt-5 pt-5">
+  <div class="container">
+    <div class="row">
+    <div class="col-6">
+      <h4 class="title">タスク管理ツール</h4>
+      <p><%= notice %></p>
+    </div>
+    <div class="col-12 ">
+      <%= form_tag({controller: :tasks, action: :index},{ method: :get}) do %>
+        <%= label_tag :タスク名 %>
+        <%= text_field_tag :keyword %>
+        <%= label_tag :ステータス %>
+        <%= select_tag 'stage',options_for_select([['未設定', ''], ['未着手', '未着手'], ['着手', '着手'], ['完了', '完了']])%>
+        <%= submit_tag :検索 %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <%= link_to '新規登録', new_task_path, class:"btn btn-primary"%>
+    </div>
+  </div>
+
     <table>
       <tr>
-        <th>タイトル</th>
-        <th>タスク詳細</th>
-        <th>終了期限</th>
+        <th>タスク名</th>
+        <th>詳しい内容</th>
+        <th> <%= link_to "終了期限", tasks_path(sort_expired: "true") %></th>
+        <th>登録日時</th>
         <th>ステータス</th>
+        <th> <%= link_to "優先度", tasks_path(sort_pro: "true") %></th>
       </tr>
         <% @tasks.each do |task| %>
       <tr>
         <td><%= task.task_name %></td>
-        <td id="task_list"><%= task.details %></td>
-        <td id="task_limit"><%= task.limit.strftime("%Y/%m/%d") %></td>
-        <td id="task_status"><%= task.status%></td>
-        <td><%= link_to '詳細を確認する', task_path(task.id) %></td>
-        <td><%= link_to '編集する', edit_task_path(task.id) %></td>
-        <td><%= link_to '削除する', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
+        <td id="task_list" class=""><div class="m-2"><%= task.details %></div></td>
+        <td id="task_limit"><div class="m-2"><%= task.limit.strftime("%Y/%m/%d") %></div></td>
+        <td id=""><%= task.created_at.strftime("%Y/%m/%d %H:%M:%S")%></td>
+        <td id="task_status"><div class="m-2"><%= task.status%></div></td>
+        <td id="task_priority"><%= task.priority%></td>
+        <td><%= link_to '詳細', task_path(task.id), class:"btn btn-outline-success"%></td>
+        <td><%= link_to '編集', edit_task_path(task.id),class:"btn btn-outline-primary" %></td>
+        <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' },class:"btn btn-outline-danger" %></td>
       </tr>
       <% end %>
     </table>
-  <%= link_to 'タスクを作る', new_task_path %>
-  <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
-
-<%= form_tag({controller: :tasks, action: :index},{ method: :get}) do %>
-    <%= label_tag :タイトル検索 %>
-    <%= text_field_tag :keyword %>
-    <%= label_tag :ステータス検索 %>
-    <%= select_tag 'stage',options_for_select([['未設定', ''], ['未着手', '未着手'], ['着手', '着手'], ['完了', '完了']])%>
-    <%= submit_tag :検索 %>
-<% end %>
-
+  <%= paginate @tasks %>
+</div>
+</section>
  
 
   <footer class="footer">
     <p>Copyright © 2020 株式会社Wing</p>
-  </footer>
+  </div>

@@ -2,15 +2,17 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
     def index
       if params[:keyword].present? && params[:stage].present?
-        @tasks = Task.search_composite(params[:keyword],params[:stage]).limit(20)
+        @tasks = Task.page(params[:page]).per(8).search_composite(params[:keyword],params[:stage]).limit(20)
       elsif params[:keyword].present?
-        @tasks = Task.search_task_name(params[:keyword]).limit(20)
+        @tasks = Task.page(params[:page]).per(8).search_task_name(params[:keyword]).limit(20)
       elsif params[:stage].present?
-        @tasks = Task.search_status(params[:stage]).limit(20)
+        @tasks = Task.page(params[:page]).per(8).search_status(params[:stage]).limit(20)
       elsif params[:sort_expired].present?
-        @tasks = Task.all.limit_sort
+        @tasks = Task.page(params[:page]).per(8).limit_sort
+      elsif params[:sort_pro].present?
+        @tasks = Task.page(params[:page]).per(8).priority_sort
       elsif
-        @tasks = Task.all
+        @tasks = Task.page(params[:page]).per(8).order(created_at: :desc)
       end
     end
     def new
@@ -57,7 +59,7 @@ class TasksController < ApplicationController
     # end
     private
     def task_params
-      params.require(:task).permit(:task_name, :details, :limit, :status)
+      params.require(:task).permit(:task_name, :details, :limit, :status, :priority)
     end
     def set_task
      @task = Task.find(params[:id])

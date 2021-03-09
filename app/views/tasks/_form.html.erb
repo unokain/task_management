@@ -21,6 +21,10 @@
     <%= form.label :limit %>
     <%= form.text_field :limit %>
   </div>
+    <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, ["未着手","着手","完了"], {include_blank: '未設定'} %>
+  </div>
   <div class="actions">
   <%= form.submit %>
 <% end %>

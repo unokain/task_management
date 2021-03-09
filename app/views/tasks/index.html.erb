@@ -5,12 +5,15 @@
       <tr>
         <th>タイトル</th>
         <th>タスク詳細</th>
+        <th>終了期限</th>
+        <th>ステータス</th>
       </tr>
         <% @tasks.each do |task| %>
       <tr>
         <td><%= task.task_name %></td>
         <td id="task_list"><%= task.details %></td>
-        <td id="task_limit"><%= task.limit %></td>
+        <td id="task_limit"><%= task.limit.strftime("%Y/%m/%d") %></td>
+        <td id="task_status"><%= task.status%></td>
         <td><%= link_to '詳細を確認する', task_path(task.id) %></td>
         <td><%= link_to '編集する', edit_task_path(task.id) %></td>
         <td><%= link_to '削除する', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
@@ -19,6 +22,17 @@
     </table>
   <%= link_to 'タスクを作る', new_task_path %>
   <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
+
+<%= form_tag({controller: :tasks, action: :index},{ method: :get}) do %>
+    <%= label_tag :タイトル検索 %>
+    <%= text_field_tag :keyword %>
+    <%= label_tag :ステータス検索 %>
+    <%= select_tag 'stage',options_for_select([['未設定', ''], ['未着手', '未着手'], ['着手', '着手'], ['完了', '完了']])%>
+    <%= submit_tag :検索 %>
+<% end %>
+
+ 
+
   <footer class="footer">
     <p>Copyright © 2020 株式会社Wing</p>
   </footer>

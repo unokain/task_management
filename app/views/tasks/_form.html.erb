@@ -9,27 +9,48 @@
       </ul>
     </div>
   <% end %>
-  <div class="task_name">
-    <%= form.label :task_name %>
-    <%= form.text_field :task_name %>
+  <div class="container text-center mt-5">
+    <div class="row">
+      <div class="col-6 mt-2">
+        <div class="task_name">
+          <%= form.label :task_name %>
+          <%= form.text_field :task_name %>
+        </div>
+      </div>
+      <div class="col-6 mt-2">
+        <div class="details">
+          <%= form.label :details %>
+          <%= form.text_field :details %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 mt-2">
+        <div>
+          <%= form.label :limit %>
+          <%= form.text_field :limit %>
+        </div>
+      </div>
+      <div class="col-6 mt-2">
+        <div class="field">
+          <%= form.label :status %>
+          <%= form.select :status, ["未着手","着手","完了"], {include_blank: '未設定'} %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 mt-2">
+        <div class="field">
+          <%= form.label :priority%>
+          <%= form.select :priority, ["高","中","低"], {include_blank: '未設定'} %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6 offset-6 mt-2">
+        <div class="actions">
+        <%= form.submit %>
+      </div>
+    </div>
   </div>
-  <div class="details">
-    <%= form.label :details %>
-    <%= form.text_field :details %>
-  </div>
-  <div>
-    <%= form.label :limit %>
-    <%= form.text_field :limit %>
-  </div>
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.select :status, ["未着手","着手","完了"], {include_blank: '未設定'} %>
-  </div>
-    <div class="field">
-    <%= form.label :priority%>
-    <%= form.select :priority, ["高","中","低"], {include_blank: '未設定'} %>
-  </div>
-  <div class="actions">
-  <%= form.submit %>
 <% end %>
-<%= link_to "一覧画面にもどる", tasks_path %>

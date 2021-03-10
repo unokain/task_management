@@ -10,6 +10,15 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="">
+      <ul class="">
+        <li class="head text-white text-left"><h5>Task_Management</h5></li>
+        <li class="head text-white "><%= link_to 'タスクを作る', new_task_path %></li>
+        <li class="head text-white "><%= link_to 'タスク一覧', tasks_path %></li>
+        <li class="head text-white ">アカウント詳細</li>
+        <li class="head text-white ">ログアウト</li>
+      </ul> 
+    </header>
+  <%= yield %>
   </body>
 </html>

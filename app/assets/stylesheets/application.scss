@@ -13,3 +13,36 @@
  *= require_tree .
  *= require_self
  */
+ @import "bootstrap";
+ header{
+     background-color: darkgrey;
+     padding: 30px 4% 10px;
+     position: fixed;
+     top: 0;
+     width: 100%;
+     display: flex;
+     align-items: center;
+
+ }
+ .head{
+    display: inline-block; /* インライン要素にすることで横に回り込む */
+    vertical-align: middle; /* 上下中央に寄せる */ 
+ }
+ ul{
+    margin: 0;
+    display: flex;
+ }
+ li {
+    list-style: none;
+    text-decoration: none;
+    margin: 0 0 0 15px;
+    font-size: 1rem;
+}
+td{
+    margin: 1rem;
+}
+footer{
+  text-align : center ;
+  margin-left: auto;
+  margin-right: auto;
+}

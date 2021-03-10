@@ -56,3 +56,5 @@ gem 'kaminari', '~> 0.17.0'
 gem 'bootsnap',require: false
 
 gem 'bcrypt', '3.1.11'
+
+gem 'pry-rails'

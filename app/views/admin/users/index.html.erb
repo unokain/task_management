@@ -1,0 +1,28 @@
+<h1 class="mt-5 pt-5">ユーザ一管理</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Admin</th>
+      <th>Tasks_counts</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.name, admin_user_path(user)%></td>
+        <td><%= user.email %></td>
+        <td><%= user.admin %></td>
+        <th><%= user.tasks.count %></th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+<%= link_to 'userを新規作成する', new_admin_user_path %>
+
+

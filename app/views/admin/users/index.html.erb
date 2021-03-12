@@ -6,7 +6,7 @@
       <th>Name</th>
       <th>Email</th>
       <th>Admin</th>
-      <th>Tasks_counts</th>
+      <th class=>Tasks_counts</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,6 +17,8 @@
         <td><%= user.email %></td>
         <td><%= user.admin %></td>
         <th><%= user.tasks.count %></th>
+        <td><%= link_to '編集する',edit_admin_user_path(user) %></td>
+        <td><%= link_to '削除する',[:admin, user], method: :delete, data:{ confirm: '本当に削除していいですか？' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,5 +26,6 @@
 </div>
 <br>
 <%= link_to 'userを新規作成する', new_admin_user_path %>
+
 
 

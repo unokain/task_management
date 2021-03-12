@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :user do
-      name { 'test1' }
-      email { 'test1@gmail.com' }
-      password {'1111111'}
+      name { 'たかし' }
+      email { 'login@gmail.com' }
+      password {'20202020'}
       admin {"false"}
   end
   factory :second_user, class: User do

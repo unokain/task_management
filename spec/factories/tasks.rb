@@ -22,4 +22,12 @@ FactoryBot.define do
     status {"完了"}
     priority {"中"}
   end
+  factory :add_task, class: Task do
+    task_name { 'Factoryで作ったデフォルトのタイトル4' }
+    details { 'Factoryで作ったデフォルトのコンテント4' }
+    limit {'20220404'}
+    status {"完了"}
+    priority {"中"}
+  end
+
 end

@@ -1,7 +1,7 @@
 <%= form_with(model: @task, local: true ) do |form| %>    
-<% if @task.errors.any? %>
+  <% if @task.errors.any? %>
     <div id="error_explanation">
-      <h2><%= @task.errors.count %>件のエラーがあります。</h2>
+      <h5 ><%= @task.errors.count %>件のエラーがあります。</h5>
       <ul>
       <% @task.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -9,6 +9,7 @@
       </ul>
     </div>
   <% end %>
+
   <div class="container text-center mt-5">
     <div class="row">
       <div class="col-6 mt-2">

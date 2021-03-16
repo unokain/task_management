@@ -23,8 +23,7 @@ class TasksController < ApplicationController
       end
     end
     def create
-      @task = Task.new (task_params)
-      #@task.user_id = current_user.id
+      @task = current_user.tasks.build(task_params)
       if params[:back]
         render :new
       else
@@ -53,10 +52,10 @@ class TasksController < ApplicationController
       @task.destroy
       redirect_to tasks_path, notice:"タスクを削除しました！"
     end
-    # def confirm
-    #   @task = current_user.tasks.build(task_params)
-    #   render :new if @picture.invalid?
-    # end
+    def confirm
+      @task = current_user.tasks.build(task_params)
+      render :new if @picture.invalid?
+    end
     private
     def task_params
       params.require(:task).permit(:task_name, :details, :limit, :status, :priority)

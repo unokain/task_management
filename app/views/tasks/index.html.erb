@@ -23,7 +23,6 @@
       <%= link_to '新規登録', new_task_path, class:"btn btn-primary"%>
     </div>
   </div>
-
     <table>
       <tr>
         <th>タスク名</th>
@@ -34,6 +33,7 @@
         <th> <%= link_to "優先度", tasks_path(sort_pro: "true") %></th>
       </tr>
         <% @tasks.each do |task| %>
+        <% if current_user.id == task.user_id%>
       <tr>
         <td><%= task.task_name %></td>
         <td id="task_list" class=""><div class="m-2"><%= task.details %></div></td>
@@ -45,9 +45,11 @@
         <td><%= link_to '編集', edit_task_path(task.id),class:"btn btn-outline-primary" %></td>
         <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' },class:"btn btn-outline-danger" %></td>
       </tr>
-      <% end %>
+       <% end %>
+    <% end %>
     </table>
   <%= paginate @tasks %>
+ 
 </div>
 </section>
  

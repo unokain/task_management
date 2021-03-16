@@ -1,5 +1,4 @@
 <h3 class="mt-5 pt-5 text-center">ブログ詳細画面</h3>
-<p id="notice"><%= notice %></p>
   <div class="container mt-5">
     <div class="row">
       <div class="col-12 mt-2">
@@ -24,6 +23,11 @@
     <div class="row">
       <div class="col-12 mt-2">
         <p>優先順位:<%=@task.priority%></p>
+      </div>
+    </div>
+        <div class="row">
+      <div class="col-12 mt-2">
+        <p>作成者:<%=@task.user.name%></p>
       </div>
     </div>
     <div class="row">

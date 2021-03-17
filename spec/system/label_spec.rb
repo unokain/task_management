@@ -31,7 +31,6 @@ RSpec.describe 'タスク管理機能', type: :system do
           fill_in "Password", with: '20202020'
           click_on 'Log in'
           visit tasks_path
-          binding.pry
           select "ruby",from:"label_id"
           click_on 'Search'
           lists = all('#task_label')

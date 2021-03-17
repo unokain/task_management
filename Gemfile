@@ -58,3 +58,5 @@ gem 'bootsnap',require: false
 gem 'bcrypt', '3.1.11'
 
 gem 'pry-rails'
+
+gem 'faker'

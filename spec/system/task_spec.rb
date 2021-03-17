@@ -13,7 +13,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
         visit new_task_path
@@ -33,7 +33,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       context 'タイトルであいまい検索をした場合' do
         it "検索キーワードを含むタスクで絞り込まれる" do
           visit new_session_path
-          fill_in "Email", with: 'login1@gmail.com'
+          fill_in "Email", with: 'login2@gmail.com'
           fill_in "Password", with: '20202020'
           click_on 'Log in'
           visit tasks_path
@@ -47,7 +47,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       context 'ステータス検索をした場合' do
         it "ステータスに完全一致するタスクが絞り込まれる" do
           visit new_session_path
-          fill_in "Email", with: 'login1@gmail.com'
+          fill_in "Email", with: 'login2@gmail.com'
           fill_in "Password", with: '20202020'
           click_on 'Log in'
           visit tasks_path
@@ -62,7 +62,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       context 'タイトルのあいまい検索とステータス検索をした場合' do
         it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
           visit new_session_path
-          fill_in "Email", with: 'login1@gmail.com'
+          fill_in "Email", with: 'login2@gmail.com'
           fill_in "Password", with: '20202020'
           click_on 'Log in'
           visit tasks_path
@@ -85,7 +85,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         # テストで使用するためのタスクを作成
         # タスク一覧ページに遷移
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
         visit tasks_path
@@ -103,7 +103,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         FactoryBot.create(:third_task,task_name: 'hiii', details: 'hihi3', limit: '20210501',status:"着手", priority:"中",user: @user,created_at: Time.current + 2.days)
         FactoryBot.create(:add_task,task_name: 'hiiiii', details: 'hihi4',limit: '20210601', status:"着手", priority:"中",user: @user,created_at: Time.current + 3.days)
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
         visit tasks_path
@@ -119,7 +119,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         FactoryBot.create(:third_task,task_name: 'hiii', details: 'hihi3', limit: '20210501',status:"着手", priority:"中",user: @user,created_at: Time.current + 2.days)
         FactoryBot.create(:add_task,task_name: 'hiiiii', details: 'hihi4',limit: '20210601', status:"着手", priority:"中",user: @user,created_at: Time.current + 3.days)
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
         visit tasks_path
@@ -136,7 +136,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         FactoryBot.create(:third_task,task_name: 'hiii', details: 'hihi3', limit: '20210501',status:"着手", priority:"中",user: @user,created_at: Time.current + 2.days)
         FactoryBot.create(:add_task,task_name: 'hiiiii', details: 'hihi4',limit: '20210601', status:"着手", priority:"高",user: @user,created_at: Time.current + 3.days)
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
         visit tasks_path
@@ -151,7 +151,7 @@ RSpec.describe 'タスク管理機能', type: :system do
      context '任意のタスク詳細画面に遷移した場合' do
        it '該当タスクの内容が表示される' do
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
         click_on "タスク一覧"

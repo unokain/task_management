@@ -13,7 +13,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'ラベルを新規作成した場合' do
       it '作成したタスクが表示される' do
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
         visit new_label_path
@@ -27,15 +27,15 @@ RSpec.describe 'タスク管理機能', type: :system do
       context 'ラベル名で検索をした場合' do
         it "検索キーワードを含むタスクで絞り込まれる" do
           visit new_session_path
-          fill_in "Email", with: 'login1@gmail.com'
+          fill_in "Email", with: 'login2@gmail.com'
           fill_in "Password", with: '20202020'
-          click_on 'Log in'
+          click_on 'Log in'    
           visit tasks_path
           select "ruby",from:"label_id"
           click_on 'Search'
           lists = all('#task_label')
           lists.each do |li|
-            expect(li).to have_content 'ruby'               
+            expect(li).to have_content 'css'               
           end
         end
      end
@@ -44,7 +44,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'ラベルの一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
         visit labels_path

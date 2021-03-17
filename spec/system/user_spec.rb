@@ -28,16 +28,16 @@ RSpec.describe 'ユーザー管理機能', type: :system do
     context 'ログインできること' do
       it 'ログインしたユーザーのプロフィールが表示される' do
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
-        expect(page).to have_content 'login1@gmail.com'
+        expect(page).to have_content 'login2@gmail.com'
       end
     end
     context 'ユーザーページに飛べること' do
       it 'ログインしたユーザーのプロフィールが表示される' do
           visit new_session_path
-          fill_in "Email", with: 'login1@gmail.com'
+          fill_in "Email", with: 'login2@gmail.com'
           fill_in "Password", with: '20202020'
           click_on 'Log in'
           expect(page).to have_content 'たかし'
@@ -47,7 +47,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
       context '一般ユーザが他人の詳細画面に飛ぶとタスク一覧画面に遷移すること' do
         it 'ログインしたユーザーのプロフィールが表示される' do
           visit new_session_path
-          fill_in "Email", with: 'login1@gmail.com'
+          fill_in "Email", with: 'login2@gmail.com'
           fill_in "Password", with: '20202020'
           click_on 'Log in'
           visit "/users/2"
@@ -57,7 +57,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
       context 'ログアウトができること' do
         it 'ログアウトしたフラッシュメッセージを表示' do
           visit new_session_path
-          fill_in "Email", with: 'login1@gmail.com'
+          fill_in "Email", with: 'login2@gmail.com'
           fill_in "Password", with: '20202020'
           click_on 'Log in'
           click_on 'ログアウト'
@@ -67,14 +67,14 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   end
   describe '管理画面のテスト' do
     before do
-        FactoryBot.create(:user, name:"たかし", email: "login1@gmail.com", password: '20202020',admin:"true")
+        FactoryBot.create(:user, name:"たかし", email: "login2@gmail.com", password: '20202020',admin:"true")
         FactoryBot.create(:second_user, name: "sample2")
         FactoryBot.create(:thrid_user)
     end
     context '管理ユーザは管理画面にアクセスできること' do
       it 'ユーザー管理画面表示' do
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
         click_on 'ユーザー一覧画面'
@@ -94,7 +94,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
     context '管理ユーザはユーザの新規登録ができること' do
       it '新規ユーザー作成のフラッシュを表示' do
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
         click_on 'ユーザー一覧画面'
@@ -110,7 +110,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
     context '管理ユーザはユーザの詳細画面にアクセスできること' do
       it '詳細画面表示' do
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
         click_on 'ユーザー一覧画面'
@@ -121,7 +121,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
     context '管理ユーザはユーザの編集画面からユーザを編集できること' do
       it 'ユーザー管理画面に変更した名前が記載されている' do
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
         click_on 'ユーザー一覧画面'
@@ -138,7 +138,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
     context '管理ユーザはユーザの削除をできること' do
       it 'ユーザー管理画面に削除した名前が表示されていない' do
         visit new_session_path
-        fill_in "Email", with: 'login1@gmail.com'
+        fill_in "Email", with: 'login2@gmail.com'
         fill_in "Password", with: '20202020'
         click_on 'Log in'
         click_on 'ユーザー一覧画面'

@@ -11,6 +11,8 @@ class TasksController < ApplicationController
         @tasks = Task.page(params[:page]).per(8).limit_sort
       elsif params[:sort_pro].present?
         @tasks = Task.page(params[:page]).per(8).priority_sort
+      elsif params[:label_id].present?
+        @tasks = Task.page(params[:page]).per(8).joins(:labels).where(labels: { id: params[:label_id] })
       elsif
         @tasks = Task.page(params[:page]).per(8).order(created_at: :desc)
       end
@@ -58,7 +60,7 @@ class TasksController < ApplicationController
     end
     private
     def task_params
-      params.require(:task).permit(:task_name, :details, :limit, :status, :priority)
+      params.require(:task).permit(:task_name, :details, :limit, :status, :priority, label_ids: [])
     end
     def set_task
      @task = Task.find(params[:id])

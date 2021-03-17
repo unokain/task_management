@@ -43,7 +43,15 @@
       <div class="col-6 mt-2">
         <div class="field">
           <%= form.label :priority%>
-          <%= form.select :priority, ["高","中","低"], {include_blank: '未設定'} %>
+          <%= form.select :priority, ["高","中","低"], {include_blank: '未設定'}  %>
+        </div>
+      </div>
+      <div class="col-6 mt-2">
+        <div class="field">
+        <% Label.all.each do |label| %>
+        <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+        <%= label.title %>
+        <% end %>
         </div>
       </div>
     </div>

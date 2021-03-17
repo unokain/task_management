@@ -13,4 +13,6 @@ class Task < ApplicationRecord
     enum priority: { "高" => 0, "中" => 1, "低" => 2 }
     scope :priority_sort, -> { order(priority: :asc) }
     belongs_to :user
+    has_many :task_labels, dependent: :destroy, foreign_key: 'task_id'
+    has_many :labels, through: :task_labels, source: :label
 end

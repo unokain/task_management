@@ -16,6 +16,10 @@
         <%= select_tag 'stage',options_for_select([['未設定', ''], ['未着手', '未着手'], ['着手', '着手'], ['完了', '完了']])%>
         <%= submit_tag :検索 %>
       <% end %>
+        <%= form_with url: tasks_path, method: :get, local: true do |form| %>
+          <%= form.select("label_id", Label.pluck(:title, :id), { include_blank: true }) %>
+          <%= form.submit 'Search', title: nil %>
+        <% end %>
     </div>
   </div>
   <div class="row">
@@ -31,6 +35,7 @@
         <th>登録日時</th>
         <th>ステータス</th>
         <th> <%= link_to "優先度", tasks_path(sort_pro: "true") %></th>
+        <th>ラベル</th>
       </tr>
         <% @tasks.each do |task| %>
         <% if current_user.id == task.user_id%>
@@ -41,6 +46,11 @@
         <td id=""><%= task.created_at.strftime("%Y/%m/%d %H:%M:%S")%></td>
         <td id="task_status"><div class="m-2"><%= task.status%></div></td>
         <td id="task_priority"><%= task.priority%></td>
+        <td id="task_label">
+          <% task.labels.each do |label| %>
+            <%= label.title %>
+          <% end %>
+        </td>
         <td><%= link_to '詳細', task_path(task.id), class:"btn btn-outline-success"%></td>
         <td><%= link_to '編集', edit_task_path(task.id),class:"btn btn-outline-primary" %></td>
         <td><%= link_to '削除', task_path(task.id), method: :delete, data: { confirm: '本当に削除していいですか？' },class:"btn btn-outline-danger" %></td>
